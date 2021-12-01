@@ -1,0 +1,36 @@
+{
+    "name": "auth-flowers",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "nuxt",
+        "build": "nuxt build",
+        "start": "nuxt start",
+        "generate": "nuxt generate"
+    },
+    "dependencies": {
+        "@nuxtjs/auth": "^4.9.1",
+        "@nuxtjs/axios": "^5.13.6",
+        "@nuxtjs/dotenv": "^1.4.1",
+        "axios": "^0.24.0",
+        "babel-loader": "^8.2.3",
+        "bootstrap": "^4.6.0",
+        "bootstrap-vue": "^2.21.2",
+        "config": "^3.3.6",
+        "cookie-universal-nuxt": "^2.1.5",
+        "core-js": "^3.15.1",
+        "dotenv": "^10.0.0",
+        "lodash": "^4.17.21",
+        "normalize.css": "^8.0.1",
+        "nuxt": "^2.15.7",
+        "qs": "^6.10.1",
+        "sass": "^1.43.4",
+        "vee-validate": "^3.4.14",
+        "vue-select": "^3.16.0"
+    },
+    "devDependencies": {
+        "js-cookie": "^3.0.1",
+        "sass-loader": "^10.1.1",
+        "sass-resources-loader": "^2.2.4"
+    }
+}
