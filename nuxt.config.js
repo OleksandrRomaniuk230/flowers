@@ -34,10 +34,33 @@ export default {
             }
         ],
         link: [{
-            rel: 'icon',
-            type: 'image/x-icon',
-            href: '/favicon.ico'
-        }]
+                rel: 'apple-touch-icon',
+                sizes: '180x180',
+                href: '/img/favicon/apple-touch-icon.png'
+            },
+            {
+                rel: 'icon',
+                type: 'image/png',
+                sizes: '32x32',
+                href: '/img/favicon/favicon-32x32.png'
+            },
+            {
+                rel: "mask-icon",
+                href: "/safari-pinned-tab.svg",
+                color: "#5bbad5"
+            },
+
+            {
+                rel: 'icon',
+                type: 'image/png',
+                sizes: '16x16',
+                href: '/img/favicon/favicon-16x16.png'
+            },
+            {
+                rel: 'manifest',
+                href: '/img/favicon/site.webmanifest'
+            }
+        ]
     },
 
     // Global CSS: https://go.nuxtjs.dev/config-css

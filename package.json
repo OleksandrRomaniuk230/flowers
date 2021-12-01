@@ -26,6 +26,7 @@
         "qs": "^6.10.1",
         "sass": "^1.43.4",
         "vee-validate": "^3.4.14",
+        "vue-feather-icons": "^5.1.0",
         "vue-select": "^3.16.0"
     },
     "devDependencies": {
