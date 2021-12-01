@@ -6,8 +6,8 @@
         <h3 v-else>{{ title }}</h3>
         <ol class="breadcrumb mt-2 mt-sm-0">
           <li class="breadcrumb-item">
-            <nuxt-link :to="localePath(`/${data.role}`)">
-              <feather class="color-success" type="home"></feather>
+            <nuxt-link to="/">
+              <feather class="icon-home" type="home"></feather>
             </nuxt-link>
           </li>
           <li class="breadcrumb-item">{{ title }}</li>

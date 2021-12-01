@@ -73,6 +73,7 @@ export default {
         { src: '~plugins/nuxt-api', ssr: false },
         { src: "~plugins/vue-select", ssr: false },
         { src: "~plugins/vee-validate", ssr: false },
+        { src: '~plugins/vue-feather', ssr: false },
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
