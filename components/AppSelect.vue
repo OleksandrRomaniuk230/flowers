@@ -3,40 +3,41 @@
     <div class="form-group" :class="{ hasError: errors.length }">
       <label v-if="label">{{ label }}</label>
       <v-select
-      v-model="selected"
+        v-model="selected"
         :label="id"
-        :placeholder="placeholder"     
-        :taggable="taggable"
+        :placeholder="placeholder"
+        :disabled="disabled"
         :multiple="multiple"
         :get-option-label="getOptionLabel"
         :options="items"
         :reduce="reduce"
         @input="changeValue"
         @search="onSearch"
-        :class="{'multiple': multiple}"
+        :class="{ multiple: multiple }"
       >
         <template v-if="selectOptions" v-slot:option="option">
           <template v-if="selectOptions === 'country'">
-             <img :src="option.flag" alt />
-            <i class="flag-icon mr-2" :class="`flag-icon-${option.code.toLowerCase()}`" />
+            <img :src="option.flag" alt />
+            <i
+              class="flag-icon mr-2"
+              :class="`flag-icon-${option.code.toLowerCase()}`"
+            />
             {{ option[labelName] }}
           </template>
         </template>
         <template slot="no-options">{{ noOptionsMessage }}</template>
       </v-select>
       <template v-if="errors.length">
-        <span
-          v-for="(e, index) in errors"
-          class="text-danger"
-          :key="index"
-        >{{ e }}</span>
+        <span v-for="(e, index) in errors" class="text-danger" :key="index">{{
+          e
+        }}</span>
       </template>
     </div>
   </ValidationProvider>
 </template>
 
 <script>
-import qs from 'qs';
+import qs from "qs";
 import _ from "lodash";
 export default {
   props: {
@@ -160,7 +161,7 @@ export default {
     return {
       selected: this.value,
       items: this.options,
-      noOptionsMessage:"Для выбора параметров введите несколько букв...",
+      noOptionsMessage: "Для выбора параметров введите несколько букв...",
     };
   },
   methods: {
@@ -172,27 +173,25 @@ export default {
       );
     },
     async getOption(e) {
+    
       let payload;
-       if (e) { 
+      if (e) {
         payload = this.buildQuery(e);
-       }
+      }
       try {
         let { data } = await this.$store.dispatch(this.action, payload);
         this.items = data;
       } catch (e) {
         console.log(e);
       } finally {
-        
       }
     },
     onSearch(search) {
-
       if (this.action !== "" && this.autocomplite) {
-      
-        this.search( search, this);
+        this.search(search, this);
       }
     },
-    search: _.debounce(async ( search, vm) => {
+    search: _.debounce(async (search, vm) => {
       vm.$emit("search:val", search);
       let payload = { q: search };
       if (vm.filters) {
@@ -200,7 +199,7 @@ export default {
       }
       try {
         let response = await vm.$store.dispatch(vm.action, payload);
-        vm.items = response.data
+        vm.items = response.data;
         if (search) {
           vm.noOptionsMessage = "ничего не найдено";
         } else {
@@ -208,8 +207,8 @@ export default {
             "Для выбора параметров введите несколько букв...";
         }
       } catch (e) {
-        console.log(e)
-      } 
+        console.log(e);
+      }
     }, 350),
 
     getOptionLabel(option) {
@@ -225,12 +224,11 @@ export default {
       }
       return option;
     },
-     buildQuery(f) {
-      return qs.stringify(JSON.parse(JSON.stringify(f)))
+    buildQuery(f) {
+      return qs.stringify(JSON.parse(JSON.stringify(f)));
     },
   },
   mounted() {
-
     if (this.action && this.actionVuex) {
       let vuexOptions = this.$store.getters[this.actionVuex].data;
       vuexOptions ? (this.items = vuexOptions) : this.getOption();

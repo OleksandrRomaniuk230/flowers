@@ -19,4 +19,22 @@ export default axios => ({
     async cities(payload) {
         return await axios.get(`autocomplete/cities?q=${payload.q}`)
     },
+    async kind() {
+        return await axios.get('lists/attributes/kind/values')
+    },
+    async sort(payload) {
+        return await axios.get(`lists/attributes/sort/values?${payload}`)
+    },
+    async color(payload) {
+        return await axios.get(`lists/attributes/color/values?${payload}`)
+    },
+    async quality(payload) {
+        return await axios.get(`lists/attributes/quality/values?${payload}`)
+    },
+    async plantations() {
+        return await axios.get('lists/plantations')
+    },
+    async searches(payload) {
+        return await axios.post('catalog/searches', payload)
+    },
 });

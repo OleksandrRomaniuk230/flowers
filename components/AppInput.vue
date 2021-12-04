@@ -6,6 +6,7 @@
         :value="value"
         :type="type"
         :placeholder="placeholder"
+         
         @blur="$emit('input', $event.target.value)"
       />
       <template v-if="errors.length && message">

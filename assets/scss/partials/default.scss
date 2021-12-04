@@ -66,6 +66,20 @@
             color: #19692c;
         }
     }
+    &-breadcrumb {
+        background-color: transparent;
+        padding: 0;
+        margin-bottom: 0;
+        margin-left: 30px;
+        list-style: none;
+        display: flex;
+        align-items: baseline;
+        &__item {
+            font-size: 14px;
+            font-family: Proxima Nova, work-Sans, sans-serif;
+            color: #313131;
+        }
+    }
 }
 
 .d-block {

@@ -17,6 +17,7 @@ export default (ctx, inject) => {
             cleanRestApi(config.data);
         }
         if (ctx.app.$cookies.get('token')) {
+
             config.headers.common['Authorization'] = `Bearer ${ctx.app.$cookies.get(
           "token"
         )}`;
