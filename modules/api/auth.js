@@ -37,4 +37,10 @@ export default axios => ({
     async searches(payload) {
         return await axios.post('catalog/searches', payload)
     },
+    async catalog(payload) {
+        return await axios.get(`catalog?${payload}`)
+    },
+    async companies(payload) {
+        return await axios.get('lists/countries/companies')
+    },
 });

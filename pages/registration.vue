@@ -66,7 +66,7 @@
   </div>
 </template>
 <script>
-import AppSelect from "~/components/AppSelect.vue";
+
 import _ from "lodash";
 export default {
     data() {
@@ -105,6 +105,6 @@ export default {
             }
         },
     },
-    components: { AppSelect }
+
 };
 </script>

@@ -18,10 +18,7 @@
         <template v-if="selectOptions" v-slot:option="option">
           <template v-if="selectOptions === 'country'">
             <img :src="option.flag" alt />
-            <i
-              class="flag-icon mr-2"
-              :class="`flag-icon-${option.code.toLowerCase()}`"
-            />
+          
             {{ option[labelName] }}
           </template>
         </template>

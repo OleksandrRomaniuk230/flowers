@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <app-page-header page-name="Каталог" />
         <div class="catalog">
-          <form>
+          <form @submit.prevent="getCatalogParam()">
             <div class="catalog-header">
               <h5 class="catalog-title">Поиск</h5>
             </div>
@@ -75,14 +75,15 @@
                 />
                 <AppSelect
                   id="code"
+                  v-model="form.f.countries"
                   placeholder="Страна"
                   label="Страна"
                   name="country"
                   label-name="name"
                   selectOptions="country"
                   :reduce="(region) => region.code"
-                  action="Auth/getCountries"
-                  actionVuex="Auth/countries"
+                  action="Auth/getCountriesCompanies"
+                  actionVuex="Auth/countriesCompanies"
                 />
                 <div class="catalog-form__wrapper-block">
                   <label class="catalog-label">Высота</label>
@@ -137,51 +138,46 @@
             "
           >
             <feather class="catalog-footer__icon" type="heart" />
-            {{ "Избранное" }}
-            ({{}})
+            {{ "Избранное" }}    ({{ favorites_count }})
           </a>
           <a
             href="#"
             class="catalog-footer__link d-flex align-items-center ic-success"
           >
             <feather class="catalog-footer__icon" type="search" />
-            {{ "Сохраненный поиск" }}
-            ({{}})
-          </a>
-          <a
-            @click.prevent="getCatalogParam('sort')"
-            href="#"
-            variant="link"
-            class="
-              catalog-footer__link
-              d-flex
-              ml-auto
-              align-items-center
-              ic-success
-            "
-          >
-            <feather class="catalog-footer__icon" type="filter" />{{
-              "Сортировать по цене"
-            }}
+            {{ "Сохраненный поиск" }} ({{ searches_count}})
           </a>
         </div>
+        <div class="catalog-items">
+          <AppCatalogItem v-for="item in data" :key="item.id" :data="item" />
+        </div>
+        <b-pagination
+          v-model="paginations.current_page"
+          :total-rows="paginations.total"
+          :per-page="paginations.per_page"
+          prev-text="Назад"
+          next-text="Вперед"
+          align="center"
+          @input="getCatalogParam"
+        ></b-pagination>
       </div>
     </client-only>
   </div>
 </template>
 <script>
+import qs from "qs";
 import _ from "lodash";
 export default {
-  // async asyncData({ store }) {
-  //   const { data, meta, favorites_count, searches_count } =
-  //     await store.dispatch("server/catalog/getCatalog");
-  //   return {
-  //     data: data,
-  //     paginations: meta,
-  //     favorites_count,
-  //     searches_count,
-  //   };
-  // },
+  async asyncData({ store }) {
+    const { data, meta, favorites_count, searches_count } =
+      await store.dispatch("Auth/getCatalog");
+    return {
+      data: data,
+      paginations: meta,
+      favorites_count,
+      searches_count,
+    };
+  },
   data() {
     return {
       form: {
@@ -203,6 +199,24 @@ export default {
     };
   },
   methods: {
+    async getCatalogParam() {
+      let payload = this.buildQuery({
+        ...this.form,
+        page: this.paginations.current_page,
+      });
+
+      try {
+        let data = await this.$store.dispatch("Auth/getCatalog", payload);
+
+        this.data = data.data;
+        this.paginations = data.meta;
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    buildQuery(f) {
+      return qs.stringify(JSON.parse(JSON.stringify(f)));
+    },
     async saveSearches() {
       try {
         await this.$store.dispatch("Auth/saveSearches", this.form);

@@ -67,14 +67,107 @@
             color: #fff;
             margin-left: auto;
         }
+        &__info {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
     }
     &__setting {
         background-color: #fff;
         padding: 30px;
         margin-top: 30px;
     }
+    &-items {
+        margin-top: 15px;
+        padding: 30px;
+        background-color: #fff;
+    }
+    &-card {
+        display: flex;
+        gap: 30px;
+        &__body {
+            width: 100%;
+            &-img {
+                width: 292px;
+                height: 292px;
+                margin-right: 25px;
+            }
+            &-wrapper {
+                display: flex;
+            }
+        }
+    }
+    &__line-bg {
+        flex: 1;
+        .row:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+    }
+    &-items {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    &__rating {
+        color: #cb991e;
+    }
+    &__color {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    &__line-item {
+        min-width: 100px;
+    }
+    &__title {
+        margin-bottom: 20px;
+    }
+    &-header {
+        &__info {
+            padding: 1.25rem;
+        }
+    }
+    &-count {
+        gap: 15px;
+    }
 }
 
 .grig-select {
     grid-area: select;
+}
+
+.text-body {
+    gap: 10px;
+}
+
+.icon-flag {
+    width: 18px;
+    height: 14px;
+}
+
+.order__add {
+    height: 38px;
+}
+
+.order__remove {
+    height: 38px;
+}
+
+.page-item {
+    margin-top: 10px;
+    &.active {
+        button {
+            color: #fff!important;
+            background-color: #59c659!important;
+            border: none;
+        }
+    }
+    button {
+        color: #59c659!important;
+    }
 }

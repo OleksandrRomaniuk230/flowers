@@ -8,6 +8,8 @@ const SET_KIND = 'SET_KIND'
 const SET_COLOR = 'SET_COLOR'
 const SET_QUALITY = 'SET_QUALITY'
 const SET_PLANTATION = 'SET_PLANTATION'
+const SET_ITEMS = 'SET_ITEMS'
+const SET_COUNTRIES_COMPANIES = 'SET_COUNTRIES_COMPANIES'
 
 
 export const state = () => ({
@@ -19,6 +21,8 @@ export const state = () => ({
     color: [],
     quality: [],
     plantation: [],
+    items: [],
+    countriesCompanies: [],
 
 })
 
@@ -31,6 +35,8 @@ export const getters = {
     color: state => state.color,
     quality: state => state.quality,
     plantation: state => state.plantation,
+    items: state => state.items,
+    countriesCompanies: state => state.countriesCompanies,
 
 }
 
@@ -45,7 +51,9 @@ export const actions = {
         return data
     },
     async getCountries({ commit }, payload) {
+
         let { data } = await this.$rest_api.auth.country(payload)
+
         commit('SET_COUNTRIES', data)
         return data
     },
@@ -77,8 +85,21 @@ export const actions = {
     },
     async saveSearches({ commit }, payload) {
         let { data } = await this.$rest_api.auth.searches(payload)
-            // await commit('SET_TOKEN', data)
-            // return data
+    },
+    async getCatalog({ commit }, payload) {
+        let { data } = await this.$rest_api.auth.catalog(payload)
+        commit('SET_ITEMS', data.data)
+        return data
+    },
+    async getCatalog({ commit }, payload) {
+        let { data } = await this.$rest_api.auth.catalog(payload)
+        commit('SET_ITEMS', data.data)
+        return data
+    },
+    async getCountriesCompanies({ commit }, payload) {
+        let { data } = await this.$rest_api.auth.companies(payload)
+        commit('SET_COUNTRIES_COMPANIES', data)
+        return data
     },
 }
 
@@ -129,5 +150,10 @@ export const mutations = {
     [SET_PLANTATION](state, payload) {
         state.plantation = payload
     },
-
+    [SET_ITEMS](state, payload) {
+        state.items = payload
+    },
+    [SET_COUNTRIES_COMPANIES](state, payload) {
+        state.countriesCompanies = payload
+    },
 }
