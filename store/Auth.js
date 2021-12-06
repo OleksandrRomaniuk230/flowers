@@ -1,8 +1,4 @@
 const SET_TOKEN = 'SET_TOKEN'
-const RESET_TOKEN = 'RESET_TOKEN'
-const SET_TOKEN_VERIFY = 'SET_TOKEN_VERIFY'
-const SET_EMAIL_SERVICE = 'SET_EMAIL_SERVICE'
-const LOGAUT = 'LOGAUT'
 const SET_COUNTRIES = 'SET_COUNTRIES'
 const SET_KIND = 'SET_KIND'
 const SET_COLOR = 'SET_COLOR'
@@ -37,6 +33,9 @@ export const getters = {
     plantation: state => state.plantation,
     items: state => state.items,
     countriesCompanies: state => state.countriesCompanies,
+    isAuthenticated(state) {
+        return !!state.token
+    },
 
 }
 
@@ -50,6 +49,7 @@ export const actions = {
         let { data } = await this.$rest_api.auth.register(payload)
         return data
     },
+
     async getCountries({ commit }, payload) {
 
         let { data } = await this.$rest_api.auth.country(payload)
@@ -84,7 +84,8 @@ export const actions = {
         return data
     },
     async saveSearches({ commit }, payload) {
-        let { data } = await this.$rest_api.auth.searches(payload)
+
+        let { data } = await this.$rest_api.auth.savesearches(payload)
     },
     async getCatalog({ commit }, payload) {
         let { data } = await this.$rest_api.auth.catalog(payload)
@@ -101,6 +102,21 @@ export const actions = {
         commit('SET_COUNTRIES_COMPANIES', data)
         return data
     },
+    async getSearches({ commit }) {
+
+        return await this.$rest_api.auth.searches()
+    },
+    async delSearches({ commit }, payload) {
+        return await this.$rest_api.auth.delSearches(payload)
+    },
+    async addFavorites({ commit }, payload) {
+        let { data } = this.$rest_api.auth.addFavorites(payload)
+        return data
+    },
+    async getFavorites({ commit }, payload) {
+        return await this.$rest_api.auth.favorites(payload)
+
+    },
 }
 
 export const mutations = {
@@ -110,31 +126,9 @@ export const mutations = {
                 secure: true,
                 expires_in: new Date(payload.expires_in * 1000)
             })
-
             state.token = payload
         }
     },
-    [RESET_TOKEN](state) {
-        state.token = this.$cookies.get('token')
-    },
-    [SET_TOKEN_VERIFY](state, payload) {
-        if (payload.token !== undefined) {
-            this.$cookies.set('token', payload.token, {
-                path: '/',
-                secure: true,
-                expires: new Date(payload.exp * 1000),
-            })
-            state.token = payload.token
-        }
-    },
-    [SET_EMAIL_SERVICE](state, payload) {
-        if (payload.emailService !== undefined) {
-            state.email_service = payload.emailService.url
-        } else {
-            state.email_service = ''
-        }
-    },
-
     [SET_COUNTRIES](state, payload) {
         state.countries = payload
     },

@@ -34,7 +34,7 @@ export default axios => ({
     async plantations() {
         return await axios.get('lists/plantations')
     },
-    async searches(payload) {
+    async savesearches(payload) {
         return await axios.post('catalog/searches', payload)
     },
     async catalog(payload) {
@@ -43,4 +43,19 @@ export default axios => ({
     async companies(payload) {
         return await axios.get('lists/countries/companies')
     },
+    async searches() {
+        return await axios.get('catalog/searches')
+    },
+    async delSearches(payload) {
+        return await axios.delete(`catalog/${payload}/searches`)
+    },
+    async addFavorites(payload) {
+
+        return await axios.post(`catalog/${payload}/favorites`)
+    },
+    async favorites(payload) {
+
+        return await axios.get('catalog/favorites')
+    },
+
 });

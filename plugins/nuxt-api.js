@@ -19,9 +19,10 @@ export default (ctx, inject) => {
         if (ctx.app.$cookies.get('token')) {
 
             config.headers.common['Authorization'] = `Bearer ${ctx.app.$cookies.get(
-          "token"
-        )}`;
+                "token"
+            )}`;
         }
+
         return config;
     }, async error => {
         return Promise.reject(error);
@@ -32,6 +33,7 @@ export default (ctx, inject) => {
     }, async(error) => {
 
         let code = error.response && error.response.status ? error.response.status : 500;
+
         if (code === 422) {
             return Promise.reject({
                 status: code,

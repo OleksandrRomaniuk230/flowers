@@ -32,7 +32,7 @@
 </template>
 <script>
 import _ from "lodash";
-export default {
+export default {  
   data() {
     return {
       form: {
@@ -44,7 +44,10 @@ export default {
   methods: {
     async loginSubmit() {
       try {
-        await this.$store.dispatch("Auth/login", this.form);
+        let data = await this.$store.dispatch("Auth/login", this.form);
+     if(data){
+     location.href = "http://localhost:3000/catalog";
+     }
       } catch (e) {
         if (e.status === 422) {
           this.$refs.form.setErrors(e.errors);

@@ -208,11 +208,11 @@ export default {
 
     async addFavorites() {
       try {
-        let { value } = await this.$store.dispatch(
-          "server/catalog/addFavorites",
+         await this.$store.dispatch(
+          "Auth/addFavorites",
           this.data.id
         );
-        this.favorites = value;
+       
       } catch (e) {
         console.log(e);
       }

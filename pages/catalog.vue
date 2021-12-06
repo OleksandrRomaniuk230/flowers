@@ -129,6 +129,7 @@
         <div class="catalog__setting col d-flex flex-wrap">
           <a
             href="#"
+              v-b-modal.modal-favourite
             class="
               catalog-footer__link
               d-flex
@@ -138,14 +139,16 @@
             "
           >
             <feather class="catalog-footer__icon" type="heart" />
-            {{ "Избранное" }}    ({{ favorites_count }})
+            {{ "Избранное" }} ({{ favorites_count }})
           </a>
+              
           <a
             href="#"
+            v-b-modal.modal-save-search
             class="catalog-footer__link d-flex align-items-center ic-success"
           >
             <feather class="catalog-footer__icon" type="search" />
-            {{ "Сохраненный поиск" }} ({{ searches_count}})
+            {{ "Сохраненный поиск" }} ({{ searches_count }})
           </a>
         </div>
         <div class="catalog-items">
@@ -162,11 +165,14 @@
         ></b-pagination>
       </div>
     </client-only>
+    <ModalFavourite/>
+    <MadalSaveSearch @search="addSearch" />
   </div>
 </template>
 <script>
 import qs from "qs";
 import _ from "lodash";
+
 export default {
   async asyncData({ store }) {
     const { data, meta, favorites_count, searches_count } =
@@ -204,10 +210,8 @@ export default {
         ...this.form,
         page: this.paginations.current_page,
       });
-
       try {
         let data = await this.$store.dispatch("Auth/getCatalog", payload);
-
         this.data = data.data;
         this.paginations = data.meta;
       } catch (e) {
@@ -218,11 +222,16 @@ export default {
       return qs.stringify(JSON.parse(JSON.stringify(f)));
     },
     async saveSearches() {
+     
       try {
         await this.$store.dispatch("Auth/saveSearches", this.form);
       } catch (e) {
         console.log(e);
       }
+    },
+    addSearch(e) {
+      this.form.f = e;
+      this.getCatalogParam();
     },
     clearSearch() {
       this.form = {
