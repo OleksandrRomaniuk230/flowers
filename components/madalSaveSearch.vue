@@ -13,9 +13,9 @@
             <template v-slot:cell(kinds)="item">{{ item.value[0] }}</template>
             <template v-slot:cell()="item">
               <span
-                v-for="(itemV, index) in item.value"
-                :key="index"
-              >{{ index === 0 ? itemV : ', ' + itemV }}</span>
+                v-for="(itemV, main) in item.value"
+                :key="main"
+              >{{ main === 0 ? itemV : ', ' + itemV }}</span>
             </template>
             <template v-slot:cell(height_from)="item">{{ item.value }} - {{ item.item.height_to }}</template>
             <template v-slot:cell(price_from)="item">{{ item.value }} - {{ item.item.price_to }}</template>
@@ -37,7 +37,7 @@ export default {
     return {
 
       fields: [
-        { key: "index", label: "" },
+        { key: "main", label: "" },
         { key: "kinds", label: "Вид растения" },
         { key: "sorts", label: "Сорт" },
         { key: "colors", label:"Цвет" },
@@ -54,7 +54,7 @@ export default {
   methods: {
     async deleteItem(id) {
       try {
-        await this.$store.dispatch("Auth/delSearches", id);
+        await this.$store.dispatch("main/delSearches", id);
         this.getSearches();
       } catch (e) {
         console.log(e);
@@ -62,7 +62,7 @@ export default {
     },
     async getSearches() {
       try {
-        let { data } = await this.$store.dispatch("Auth/getSearches");
+        let { data } = await this.$store.dispatch("main/getSearches");
         this.data = data;
   
       } catch (e) {

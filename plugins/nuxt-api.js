@@ -1,6 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
-import apiAuth from '@/modules/api/auth';
+import apiAuth from '~/modules/api/main';
 
 
 function cleanRestApi(obj) {

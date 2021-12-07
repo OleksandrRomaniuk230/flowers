@@ -26,8 +26,8 @@
                   label-name="name"
                   :searchable="false"
                   :reduce="(e) => e.id"
-                  action="Auth/getKind"
-                  actionVuex="Auth/kind"
+                  action="main/getKind"
+                  actionVuex="main/kind"
                   @input="form.f.sorts = null"
                 />
                 <AppSelect
@@ -38,7 +38,7 @@
                   v-model="form.f.sorts"
                   label="Сорт"
                   label-name="name"
-                  action="Auth/getSort"
+                  action="main/getSort"
                   :payload="
                     form.f.kinds && form.f.kinds.length !== 0
                       ? { parent_id: form.f.kinds }
@@ -52,8 +52,8 @@
                   label-name="name"
                   :searchable="false"
                   :reduce="(e) => e.id"
-                  action="Auth/getColor"
-                  actionVuex="Auth/color"
+                  action="main/getColor"
+                  actionVuex="main/color"
                 />
                 <AppSelect
                   id="qualities"  class="grig-select__media"
@@ -62,8 +62,8 @@
                   label-name="name"
                   :searchable="false"
                   :reduce="(e) => e.id"
-                  action="Auth/getQuality"
-                  actionVuex="Auth/quality"
+                  action="main/getQuality"
+                  actionVuex="main/quality"
                 />
                 <AppSelect
                   id="plantations"  class="grig-select__media"
@@ -72,7 +72,7 @@
                   label-name="name"
                   :searchable="false"
                   :reduce="(e) => e.id"
-                  action="Auth/getPlantations"
+                  action="main/getPlantations"
                 />
                 <AppSelect
                   id="code"  class="grig-select__media"
@@ -83,8 +83,8 @@
                   label-name="name"
                   selectOptions="country"
                   :reduce="(region) => region.code"
-                  action="Auth/getCountriesCompanies"
-                  actionVuex="Auth/countriesCompanies"
+                  action="main/getCountriesCompanies"
+                  actionVuex="main/countriesCompanies"
                 />
                 <div class="catalog-form__wrapper-block grig-select__media">
                   <label class="catalog-label">Высота</label>
@@ -177,7 +177,7 @@ import _ from "lodash";
 export default {
   async asyncData({ store }) {
     const { data, meta, favorites_count, searches_count } =
-      await store.dispatch("Auth/getCatalog");
+      await store.dispatch("main/getCatalog");
     return {
       data: data,
       paginations: meta,
@@ -212,7 +212,7 @@ export default {
         page: this.paginations.current_page,
       });
       try {
-        let data = await this.$store.dispatch("Auth/getCatalog", payload);
+        let data = await this.$store.dispatch("main/getCatalog", payload);
         this.data = data.data;
         this.paginations = data.meta;
       } catch (e) {
@@ -225,7 +225,7 @@ export default {
     async saveSearches() {
      
       try {
-        await this.$store.dispatch("Auth/saveSearches", this.form);
+        await this.$store.dispatch("main/saveSearches", this.form);
       } catch (e) {
         console.log(e);
       }

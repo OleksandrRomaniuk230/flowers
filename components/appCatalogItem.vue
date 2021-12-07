@@ -209,7 +209,7 @@ export default {
     async addFavorites() {
       try {
          await this.$store.dispatch(
-          "Auth/addFavorites",
+          "main/addFavorites",
           this.data.id
         );
        

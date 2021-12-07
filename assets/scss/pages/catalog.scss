@@ -35,9 +35,12 @@
     &-grid {
         display: grid;
         grid-template-areas: "select select select select";
-        grid-template-rows: repeat(auto-fill, 1fr);
-        grid-template-columns: repeat(auto-fill, 1fr);
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-gap: 2vw;
+    }
+    .grig-select {
+        grid-area: select;
     }
     &-footer {
         padding: 30px;

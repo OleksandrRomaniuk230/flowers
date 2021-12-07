@@ -36,8 +36,8 @@
                           label-name="name"
                           selectOptions="country"
                           :reduce="region => region.code"
-                          action="Auth/getCountries"
-                          actionVuex="Auth/countries"/>
+                          action="main/getCountries"
+                          actionVuex="main/countries"/>
             <AppSelect  v-model="form.company.city"
                           inputName="company.city"
                           id="city"
@@ -48,7 +48,7 @@
                           selectOptions="city"
                           :reduce="region => region.name"
                           autocomplite
-                          action="Auth/getCities" 
+                          action="main/getCities" 
                           @search:val="$event ? form.company.city = $event : null"
                        />
           <AppInput label="Пароль" inputName="password" v-model="form.password" type="password"  placeholder="**********"/>
@@ -92,7 +92,7 @@ export default {
     methods: {
         async onSubmit() {
             try {
-                await this.$store.dispatch("Auth/register", this.form);
+                await this.$store.dispatch("main/register", this.form);
             }
             catch (e) {
                 if (this.form.role === "buyer") {

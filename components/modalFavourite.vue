@@ -35,7 +35,7 @@ export default {
     return {
   
       fields: [
-        { key: "index", label: "" },
+        { key: "main", label: "" },
         { key: "name", label: "Поставщик" },
         { key: "plantation", label: "Плантация" },
         { key: "color", label: "Цвет" },
@@ -48,7 +48,7 @@ export default {
   methods: {
     async getFavorites() {
       try {
-        const data = await this.$store.dispatch("Auth/getFavorites");
+        const data = await this.$store.dispatch("main/getFavorites");
         this.data = data.data.data;
         console.log(this.data);
       } catch (e) {

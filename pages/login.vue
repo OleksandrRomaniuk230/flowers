@@ -44,7 +44,7 @@ export default {
   methods: {
     async loginSubmit() {
       try {
-        let data = await this.$store.dispatch("Auth/login", this.form);
+        let data = await this.$store.dispatch("main/login", this.form);
      if(data){
      location.href = "http://localhost:3000/catalog";
      }
