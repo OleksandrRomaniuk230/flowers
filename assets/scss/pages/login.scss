@@ -1,33 +1,27 @@
 .login {
-  background: url('/img/background-home.svg');
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  padding-top: 70px;
-  padding-bottom: 70px;
-
-  &-info {
+    background: url('/img/background-home.svg');
+    width: 100%;
+    min-height: 100vh;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-
-  &-link {
-    &__wrapper {
-      margin-top: 15px;
-
+    justify-content: center;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    &-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
     }
-
-    &__title {
-      letter-spacing: .5px;
-      color: #333;
-      font-family: Proximanova;
-     
-      line-height: 1.5;
-      font-size: 14px;
+    &-link {
+        &__wrapper {
+            margin-top: 15px;
+        }
+        &__title {
+            letter-spacing: .5px;
+            color: #333;
+            font-family: Proximanova;
+            line-height: 1.5;
+            font-size: 14px;
+        }
     }
-  }
-
-  
 }

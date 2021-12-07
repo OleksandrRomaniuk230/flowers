@@ -35,14 +35,15 @@
     &-grid {
         display: grid;
         grid-template-areas: "select select select select";
-        grid-template-rows: 1fr 1fr 1fr;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: repeat(auto-fill, 1fr);
+        grid-template-columns: repeat(auto-fill, 1fr);
         grid-gap: 2vw;
     }
     &-footer {
         padding: 30px;
         display: flex;
         gap: 25px;
+        flex-wrap: wrap;
         &__icon {
             width: 24px;
             height: 24px;
@@ -78,6 +79,8 @@
         background-color: #fff;
         padding: 30px;
         margin-top: 30px;
+        gap: 10px;
+        flex-wrap: wrap;
     }
     &-items {
         margin-top: 15px;
@@ -135,10 +138,6 @@
     &-count {
         gap: 15px;
     }
-}
-
-.grig-select {
-    grid-area: select;
 }
 
 .text-body {

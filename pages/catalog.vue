@@ -20,6 +20,7 @@
 
                 <AppSelect
                   id="kinds"
+                   class="grig-select__media"
                   v-model="form.f.kinds"
                   label="Вид растения"
                   label-name="name"
@@ -30,7 +31,7 @@
                   @input="form.f.sorts = null"
                 />
                 <AppSelect
-                  id="sorts"
+                  id="sorts" class="grig-select__media"
                   :disabled="
                     form.f.kinds && form.f.kinds.length !== 0 ? false : true
                   "
@@ -45,7 +46,7 @@
                   "
                 />
                 <AppSelect
-                  id="colors"
+                  id="colors" class="grig-select__media"
                   v-model="form.f.colors"
                   label="Цвет"
                   label-name="name"
@@ -55,7 +56,7 @@
                   actionVuex="Auth/color"
                 />
                 <AppSelect
-                  id="qualities"
+                  id="qualities"  class="grig-select__media"
                   v-model="form.f.qualities"
                   label="Качество"
                   label-name="name"
@@ -65,7 +66,7 @@
                   actionVuex="Auth/quality"
                 />
                 <AppSelect
-                  id="plantations"
+                  id="plantations"  class="grig-select__media"
                   v-model="form.f.plantations"
                   label="Плантация"
                   label-name="name"
@@ -74,7 +75,7 @@
                   action="Auth/getPlantations"
                 />
                 <AppSelect
-                  id="code"
+                  id="code"  class="grig-select__media"
                   v-model="form.f.countries"
                   placeholder="Страна"
                   label="Страна"
@@ -85,14 +86,14 @@
                   action="Auth/getCountriesCompanies"
                   actionVuex="Auth/countriesCompanies"
                 />
-                <div class="catalog-form__wrapper-block">
+                <div class="catalog-form__wrapper-block grig-select__media">
                   <label class="catalog-label">Высота</label>
                   <div class="catalog-select__wrapper">
                     <AppInput placeholder="От" v-model="form.f.height_from" />
                     <AppInput placeholder="До" v-model="form.f.height_to" />
                   </div>
                 </div>
-                <div class="catalog-form__wrapper-block">
+                <div class="catalog-form__wrapper-block grig-select__media">
                   <label class="catalog-label">Цена</label>
                   <div class="catalog-select__wrapper">
                     <AppInput placeholder="От" v-model="form.f.price_from" />
